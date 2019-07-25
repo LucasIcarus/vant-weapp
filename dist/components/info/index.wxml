@@ -1,0 +1,5 @@
+<block wx:if="{{$taroCompReady}}">
+    <block wx:if="{{!(info === null)}}">
+        <view class="{{anonymousState__temp}}">{{info}}</view>
+    </block>
+</block>
