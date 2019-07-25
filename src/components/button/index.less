@@ -1,0 +1,168 @@
+@import '../common/style/var.less';
+
+.van-button {
+  position: relative;
+  display: inline-block;
+  height: 44Px;
+  padding: 0;
+  font-size: 16Px;
+  line-height: 42Px;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-radius: @button-border-radius;
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: 100%;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: @black;
+    border: inherit;
+    border-color: @black;
+    border-radius: inherit; /* inherit parent's border radius */
+    content: ' ';
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  // reset weapp default border
+  &::after {
+    border-width: 0;
+  }
+
+  &--active::before {
+    opacity: 0.15;
+  }
+
+  &--unclickable::after {
+    display: none;
+  }
+
+  &--default {
+    color: @button-default-color;
+    background-color: @button-default-background-color;
+    border: 1Px solid @button-default-border-color;
+  }
+
+  &--primary {
+    color: @button-primary-color;
+    background-color: @button-primary-background-color;
+    border: 1Px solid @button-primary-border-color;
+  }
+
+  &--info {
+    color: @button-info-color;
+    background-color: @button-info-background-color;
+    border: 1Px solid @button-info-border-color;
+  }
+
+  &--danger {
+    color: @button-danger-color;
+    background-color: @button-danger-background-color;
+    border: 1Px solid @button-danger-border-color;
+  }
+
+  &--warning {
+    color: @button-warning-color;
+    background-color: @button-warning-background-color;
+    border: 1Px solid @button-warning-border-color;
+  }
+
+  &--plain {
+    background-color: @white;
+
+    &.van-button--primary {
+      color: @button-primary-background-color;
+    }
+
+    &.van-button--info {
+      color: @button-info-background-color;
+    }
+
+    &.van-button--danger {
+      color: @button-danger-background-color;
+    }
+
+    &.van-button--warning {
+      color: @button-warning-background-color;
+    }
+  }
+
+  &--large {
+    width: 100%;
+    height: 50Px;
+    line-height: 48Px;
+  }
+
+  &--normal {
+    padding: 0 15Px;
+    font-size: 14Px;
+  }
+
+  &--small {
+    height: 30Px;
+    min-width: 60Px;
+    padding: 0 8Px;
+    font-size: 12Px;
+    line-height: 28Px;
+  }
+
+  /* mini图标默认宽度50Px，文字不能超过4个 */
+  &--mini {
+    display: inline-block;
+    width: 50Px;
+    height: 22Px;
+    font-size: 10Px;
+    line-height: 20Px;
+
+    & + .van-button--mini {
+      margin-left: 5Px;
+    }
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--round {
+    border-radius: @button-round-border-radius;
+  }
+
+  &--square {
+    border-radius: 0;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+  }
+
+  &__loading-text {
+    margin-left: 5Px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &--hairline {
+    border-width: 0;
+    padding-top: 1Px; // add 1Px padding for text vertical align middle
+
+    &::after {
+      border-width: 1Px;
+      border-color: inherit;
+      border-radius: @button-border-radius * 2;
+    }
+
+    &.van-button--round::after {
+      border-radius: @button-round-border-radius;
+    }
+
+    &.van-button--square::after {
+      border-radius: 0;
+    }
+  }
+}

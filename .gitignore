@@ -4,6 +4,7 @@
 .idea
 .vscode
 node_modules
+dist
 project.config.json
 docs/dist
 example/dist

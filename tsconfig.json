@@ -1,13 +1,27 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "esModuleInterop": true,
-    "target": "es6",
+    "target": "es2017",
+    "module": "commonjs",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "jsxFactory": "Taro.createElement",
     "noImplicitAny": false,
-    "declaration": true,
-    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
     "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "preserve",
+    "typeRoots": [
+      "node_modules/@types",
+      "global.d.ts"
+    ],
     "types": ["miniprogram-api-typings"]
   },
-  "include": ["packages/**/*", "types/**/*"]
+  "compileOnSave": false
 }

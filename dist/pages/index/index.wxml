@@ -1,0 +1,5 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index"><text>Hello world!</text>
+        <toast id="van-toast" compid="{{$compid__10}}"></toast>
+    </view>
+</block>
