@@ -1,6 +1,6 @@
 <block wx:if="{{$taroCompReady}}">
     <view class="index"><text>Hello world!</text>
-        <info compid="{{$compid__1}}"></info>
-        <info></info>
+        <loading></loading>
+        <loading compid="{{$compid__2}}"></loading>
     </view>
 </block>

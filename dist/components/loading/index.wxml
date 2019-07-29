@@ -1,0 +1,42 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="{{anonymousState__temp}}">
+        <view class="{{anonymousState__temp2}}">
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp3}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp4}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp5}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp6}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp7}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp8}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp9}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp10}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp11}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp12}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp13}}"></view>
+            </block>
+            <block wx:if="{{type === 'spinner'}}">
+                <view class="{{anonymousState__temp14}}"></view>
+            </block>
+        </view>
+    </view>
+</block>

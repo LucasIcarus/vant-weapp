@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "info": "../../components/info/index"
+    "loading": "../../components/loading/index"
   },
   "navigationBarTitleText": "首页"
 }

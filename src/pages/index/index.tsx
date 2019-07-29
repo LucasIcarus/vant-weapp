@@ -2,6 +2,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 
 import Info from '../../components/info';
+import Loading from '../../components/loading';
 import './index.less';
 
 export default class Index extends Component {
@@ -44,8 +45,8 @@ export default class Index extends Component {
     return (
       <View className='index'>
         <Text>Hello world!</Text>
-        <Info className="fancy-info" info="fancy" />
-        <Info />
+        <Loading />
+        <Loading type="spinner" />
       </View>
     )
   }
