@@ -22,7 +22,7 @@
           animation-timing-function: steps(12);
 }
 .van-loading__spinner--circular {
-  border: 1rpx solid;
+  border: 1Px solid;
   border-radius: 100%;
   border-color: transparent;
   border-top-color: currentColor;
@@ -35,7 +35,7 @@
   position: absolute;
 }
 .van-loading__dot::before {
-  width: 2rpx;
+  width: 2Px;
   height: 25%;
   content: ' ';
   display: block;

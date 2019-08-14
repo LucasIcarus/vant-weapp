@@ -77,11 +77,11 @@ import VanIcon from '../icon';
 
 export type ToastType = 'text' | 'loading' | 'success' | 'fail' | 'html';
 export type ToastPosition = 'top' | 'middle' | 'bottom';
-
+export type ToastMessage = string | number;
 export interface IToastProps {
   show?: boolean;
   mask?: boolean;
-  message?: string;
+  message?: ToastMessage;
   forbidClick?: boolean;
   zIndex?: number;
   type?: ToastType;
@@ -93,8 +93,8 @@ export interface IToastProps {
 const cx = bem({ prefix: 'van-', block: 'toast' });
 
 const Toast: FunctionComponent<IToastProps> = ({
-  show = true,
-  mask = true,
+  show = false,
+  mask = false,
   message = '',
   forbidClick = false,
   zIndex = 1000,
@@ -107,7 +107,7 @@ const Toast: FunctionComponent<IToastProps> = ({
       {(mask || forbidClick) && <Overlay show={show} mask={mask} zIndex={zIndex} />}
       <Transition
         show={show}
-        customStyle={`z-index:${zIndex};`}
+        customStyle={`z-index:${zIndex};position: fixed;top: 50%;left: 50%;max-width: 70%;width: fit-content;transform: translate(-50%, -50%);`}
         className={cx('container')}
       >
         <View
@@ -138,4 +138,5 @@ Toast.defaultProps = {
 };
 Toast.options = { addGlobalClass: true };
 
+export * from './toast';
 export default Toast;

@@ -14,6 +14,8 @@ var _index = require("../../npm/@tarojs/taro-weapp/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
+var _index3 = require("../../components/toast/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21,14 +23,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 // import VantIcon from '../../components/icon';
 // import Loading from '../../components/loading';
 // import Transition from '../../components/transition';
-// import VanButton from '../../components/button';
 
 // import Overlay from '../../components/overlay';
 
+// import { noop } from '../../components/common';
 var Index = function (_BaseComponent) {
   _inherits(Index, _BaseComponent);
 
@@ -43,11 +44,11 @@ var Index = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__10", "type", "mask", "message", "show", "zIndex", "duration", "position", "forbidClick", "loadingType"], _this.config = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__0", "$compid__1", "$compid__2", "$compid__3", "$compid__4", "props", "showPop"], _this.config = {
       navigationBarTitleText: '首页'
-    }, _this.clickHandler = function () {
-      // this.setState({ show: false });
-    }, _this.customComponents = ["Toast"], _temp), _possibleConstructorReturn(_this, _ret);
+    }, _this.tickHandler = function () {
+      _this.setState({ showPop: true });
+    }, _this.customComponents = ["VanButton", "Toast", "Popup"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Index, [{
@@ -63,15 +64,7 @@ var Index = function (_BaseComponent) {
        */
 
       this.state = {
-        type: 'text',
-        mask: false,
-        message: '',
-        show: true,
-        zIndex: 1000,
-        duration: 3000,
-        position: 'middle',
-        forbidClick: false,
-        loadingType: 'circular'
+        showPop: false
       };
       this.$$refs = [];
     }
@@ -91,9 +84,6 @@ var Index = function (_BaseComponent) {
     key: "componentDidHide",
     value: function componentDidHide() {}
   }, {
-    key: "tickHandler",
-    value: function tickHandler() {}
-  }, {
     key: "timeupHandler",
     value: function timeupHandler() {}
   }, {
@@ -104,15 +94,64 @@ var Index = function (_BaseComponent) {
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
-      var $compid__10 = (0, _index.genCompid)(__prefix + "$compid__10");
-      var $props__10 = _extends({}, this.__state);
-      // const state = this.state;
+      var $compid__0 = (0, _index.genCompid)(__prefix + "$compid__0");
+      var $compid__1 = (0, _index.genCompid)(__prefix + "$compid__1");
+      var $compid__2 = (0, _index.genCompid)(__prefix + "$compid__2");
+      var $compid__3 = (0, _index.genCompid)(__prefix + "$compid__3");
+      var $compid__4 = (0, _index.genCompid)(__prefix + "$compid__4");
 
-      _index.propsManager.set($props__10, $compid__10);
+      var _useToast = (0, _index3.useToast)(),
+          props = _useToast.props,
+          ToastUtil = _useToast.ToastUtil;
+
+      var clickHandler = function clickHandler() {
+        ToastUtil({ message: 'hello world' });
+      };
+      var clickHandler2 = function clickHandler2() {
+        ToastUtil.clear();
+      };
+      this.anonymousFunc0 = clickHandler;
+      this.anonymousFunc1 = clickHandler2;
+      var $props__0 = {
+        "type": "default",
+        "onClick": this.anonymousFunc0
+      };
+      var $props__1 = {
+        "type": "primary",
+        "onClick": this.anonymousFunc1
+      };
+      var $props__2 = {
+        "type": "info",
+        "onClick": this.tickHandler
+      };
+      var $props__3 = _extends({}, props);
+      var $props__4 = {
+        "show": this.__state.showPop
+      };
+      _index.propsManager.set($props__0, $compid__0);
+      _index.propsManager.set($props__1, $compid__1);
+      _index.propsManager.set($props__2, $compid__2);
+      _index.propsManager.set($props__3, $compid__3);
+      _index.propsManager.set($props__4, $compid__4);
       Object.assign(this.__state, {
-        $compid__10: $compid__10
+        $compid__0: $compid__0,
+        $compid__1: $compid__1,
+        $compid__2: $compid__2,
+        $compid__3: $compid__3,
+        $compid__4: $compid__4,
+        props: props
       });
       return this.__state;
+    }
+  }, {
+    key: "anonymousFunc0",
+    value: function anonymousFunc0(e) {
+      ;
+    }
+  }, {
+    key: "anonymousFunc1",
+    value: function anonymousFunc1(e) {
+      ;
     }
   }]);
 

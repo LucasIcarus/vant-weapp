@@ -1,27 +1,24 @@
+import { useState } from '@tarojs/taro';
 import { isObj } from '../common/utils';
+import { IToastProps, ToastMessage, ToastType } from '.';
 
-type ToastMessage = string | number;
-
-interface ToastOptions {
-  show?: boolean;
-  type?: string;
-  mask?: boolean;
-  zIndex?: number;
+interface IToastOptions extends IToastProps {
   context?: any;
-  position?: string;
   duration?: number;
   selector?: string;
-  forbidClick?: boolean;
-  loadingType?: string;
-  message?: ToastMessage;
   onClose?: () => void;
 }
 
-const defaultOptions = {
+interface IToastInstance {
+  clear(): void;
+  timer?: number;
+}
+
+const DefaultOptions: IToastOptions = {
   type: 'text',
   mask: false,
   message: '',
-  show: true,
+  show: false,
   zIndex: 1000,
   duration: 3000,
   position: 'middle',
@@ -30,82 +27,63 @@ const defaultOptions = {
   selector: '#van-toast'
 };
 
-let queue: any[] = [];
-let currentOptions: ToastOptions = { ...defaultOptions };
-
-function parseOptions(message): ToastOptions {
+function parseOptions(message): IToastOptions {
   return isObj(message) ? message : { message };
 }
 
-function getContext() {
-  const pages = getCurrentPages();
-  return pages[pages.length - 1];
+function extractProps(options: IToastOptions): IToastProps {
+  const { context, duration, onClose, selector, ...props } = options;
+  return props;
 }
 
-function Toast(toastOptions: ToastOptions | ToastMessage): Weapp.Component {
-  const options = {
-    ...currentOptions,
-    ...parseOptions(toastOptions)
-  } as ToastOptions;
+let queue: IToastInstance[] = [];
 
-  const context = options.context || getContext();
-  const toast = context.selectComponent(options.selector);
+export function useToast() {
+  const [options, changeOptions] = useState({ ...DefaultOptions });
+  function Toast(toastOptions: IToastOptions | ToastMessage) {
+    const nextOptions = {
+      ...options,
+      ...parseOptions(toastOptions),
+      show: true,
+    };
 
-  if (!toast) {
-    throw new Error('未找到 van-toast 节点，请确认 selector 及 context 是否正确');
-  }
-
-  delete options.context;
-  delete options.selector;
-
-  toast.clear = () => {
-    toast.setData({ show: false });
-
-    if (options.onClose) {
-      options.onClose();
+    const toast: IToastInstance = {
+      clear() {
+        changeOptions({ ...nextOptions, show: false });
+        if (nextOptions.onClose) {
+          nextOptions.onClose();
+        }
+      }
+    };
+    changeOptions({ ...options, ...nextOptions });
+    clearTimeout(toast.timer);
+    if (nextOptions.duration && nextOptions.duration > 0) {
+      toast.timer = setTimeout(() => {
+        toast.clear();
+        queue = queue.filter(item => item !== toast);
+      }, options.duration);
     }
+
+    queue.push(toast);
+
+    return toast;
+  }
+  const createMethod = (type: ToastType) => (options: IToastOptions | ToastMessage) =>
+    Toast({
+      type,
+      ...parseOptions(options)
+    });
+
+  Toast.loading = createMethod('loading');
+  Toast.success = createMethod('success');
+  Toast.fail = createMethod('fail');
+  Toast.clear = () => {
+    queue.forEach(toast => {
+      clearTimeout(toast.timer);
+      toast.clear();
+    });
+    queue = [];
   };
 
-  queue.push(toast);
-  toast.$component.props = options;
-  // toast.setData(options);
-  clearTimeout(toast.timer);
-
-  if (options.duration && options.duration > 0) {
-    toast.timer = setTimeout(() => {
-      toast.clear();
-      queue = queue.filter(item => item !== toast);
-    }, options.duration);
-  }
-
-  toast.$component.fuckWeapp();
-
-  return toast;
+  return { props: extractProps(options), ToastUtil: Toast };
 }
-
-const createMethod = type => (options: ToastOptions | ToastMessage) =>
-  Toast({
-    type,
-    ...parseOptions(options)
-  });
-
-Toast.loading = createMethod('loading');
-Toast.success = createMethod('success');
-Toast.fail = createMethod('fail');
-
-Toast.clear = () => {
-  queue.forEach(toast => {
-    toast.clear();
-  });
-  queue = [];
-};
-
-Toast.setDefaultOptions = (options: ToastOptions) => {
-  Object.assign(currentOptions, options);
-};
-
-Toast.resetDefaultOptions = () => {
-  currentOptions = { ...defaultOptions };
-};
-
-export default Toast;

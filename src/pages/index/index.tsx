@@ -4,25 +4,13 @@ import { View, Text } from '@tarojs/components'
 // import VantIcon from '../../components/icon';
 // import Loading from '../../components/loading';
 // import Transition from '../../components/transition';
-// import VanButton from '../../components/button';
-import Toast, { ToastType, ToastPosition } from '../../components/toast';
+import VanButton from '../../components/button';
+import Toast, { useToast } from '../../components/toast';
+import Popup from '../../components/popup';
 // import Overlay from '../../components/overlay';
 
 import './index.less';
-import { LoadingType } from '../../components/loading';
 // import { noop } from '../../components/common';
-
-interface ITestState {
-  type: ToastType;
-  mask: boolean;
-  message: string;
-  show: boolean;
-  zIndex: number;
-  duration: number;
-  position: ToastPosition;
-  forbidClick: boolean;
-  loadingType: LoadingType;
-}
 
 export default class Index extends Component {
 
@@ -35,19 +23,11 @@ export default class Index extends Component {
    */
   config: Config = {
     navigationBarTitleText: '首页'
-  }
+  };
 
-  state: ITestState = {
-    type: 'text',
-    mask: false,
-    message: '',
-    show: true,
-    zIndex: 1000,
-    duration: 3000,
-    position: 'middle',
-    forbidClick: false,
-    loadingType: 'circular',
-  }
+  state = {
+    showPop: false,
+  };
 
   componentWillMount () { }
 
@@ -61,18 +41,23 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
-  tickHandler () {
-  }
+  tickHandler = () => {
+    this.setState({ showPop: true });
+  };
 
   timeupHandler () {
   }
 
-  clickHandler = () => {
-    // this.setState({ show: false });
-  }
-
   render () {
-    // const state = this.state;
+    const { props, ToastUtil } = useToast();
+    const clickHandler = () => {
+      ToastUtil({ message: 'hello world' });
+    };
+
+    const clickHandler2 = () => {
+      ToastUtil.clear();
+    };
+
     return (
       <View className='index'>
         <Text>Hello world!</Text>
@@ -82,9 +67,9 @@ export default class Index extends Component {
         <Transition className="block">
           内容
         </Transition> */}
-        {/* <VanButton type="default">默认按钮</VanButton> */}
-        {/* <VanButton type="primary">主要按钮</VanButton> */}
-        {/* <VanButton type="info">信息按钮</VanButton> */}
+        <VanButton type="default" onClick={clickHandler}>默认按钮</VanButton>
+        <VanButton type="primary" onClick={clickHandler2}>主要按钮</VanButton>
+        <VanButton type="info" onClick={this.tickHandler}>信息按钮</VanButton>
         {/* <VanButton type="warning">警告按钮</VanButton> */}
         {/* <VanButton type="danger">危险按钮</VanButton> */}
         {/* <VanButton plain type="primary">朴素按钮</VanButton> */}
@@ -101,7 +86,8 @@ export default class Index extends Component {
         {/* <VanButton size="normal">普通按钮</VanButton> */}
         {/* <VanButton size="small">小型按钮</VanButton> */}
         {/* <VanButton size="mini">迷你按钮</VanButton> */}
-        <Toast {...this.state} id="van-toast" />
+        <Toast {...props} />
+        <Popup show={this.state.showPop}>Hello world</Popup>
       </View>
     )
   }

@@ -1,20 +1,20 @@
 
 .van-info {
   position: absolute;
-  top: -8rpx;
+  top: -8Px;
   right: 0;
-  min-width: 16rpx;
-  padding: 0 3rpx;
+  min-width: 16Px;
+  padding: 0 3Px;
   font-family: PingFang SC, Helvetica Neue, Arial, sans-serif;
-  font-size: 12rpx;
+  font-size: 12Px;
   font-weight: 500;
-  line-height: 14rpx;
+  line-height: 14Px;
   color: #fff;
   text-align: center;
   white-space: nowrap;
   background-color: #f44;
-  border: 1rpx solid #fff;
-  border-radius: 16rpx;
+  border: 1Px solid #fff;
+  border-radius: 16Px;
   -webkit-transform: translateX(50%);
       -ms-transform: translateX(50%);
           transform: translateX(50%);

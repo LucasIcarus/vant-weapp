@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "toast": "../../components/toast/index"
+    "van-button": "../../components/button/index",
+    "toast": "../../components/toast/index",
+    "popup": "../../components/popup/index"
   },
   "navigationBarTitleText": "首页"
 }

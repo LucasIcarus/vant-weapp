@@ -1,3 +1,4 @@
+/*
 import { VantComponent } from '../common/component';
 
 VantComponent({
@@ -56,3 +57,9 @@ VantComponent({
     }
   }
 });
+
+<view class="custom-class van-collapse {{ border ? 'van-hairline--top-bottom' : '' }}">
+  <slot />
+</view>
+
+*/

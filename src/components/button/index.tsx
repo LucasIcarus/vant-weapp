@@ -211,8 +211,6 @@ const VanButton: FunctionComponent<IButtonProps> = ({
   onLaunchApp = noop,
   onOpenSetting = noop,
 }) => {
-  console.log(loading);
-
   const clickHandler = () => {
     if (!disabled && !loading) {
       onClick();

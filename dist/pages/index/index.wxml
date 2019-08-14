@@ -1,5 +1,9 @@
 <block wx:if="{{$taroCompReady}}">
     <view class="index"><text>Hello world!</text>
-        <toast id="van-toast" compid="{{$compid__10}}"></toast>
+        <van-button compid="{{$compid__0}}">默认按钮</van-button>
+        <van-button compid="{{$compid__1}}">主要按钮</van-button>
+        <van-button compid="{{$compid__2}}">信息按钮</van-button>
+        <toast compid="{{$compid__3}}"></toast>
+        <popup compid="{{$compid__4}}">Hello world</popup>
     </view>
 </block>
