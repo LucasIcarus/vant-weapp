@@ -34,12 +34,13 @@ var _App = function (_BaseComponent) {
     var _this = _possibleConstructorReturn(this, (_App.__proto__ || Object.getPrototypeOf(_App)).apply(this, arguments));
 
     _this.config = {
-      pages: ['pages/index/index'],
+      pages: ['pages/dashboard/index', 'pages/button/index', 'pages/loading/index', 'pages/transition/index', 'pages/toast/index'],
       window: {
-        backgroundTextStyle: 'light',
-        navigationBarBackgroundColor: '#fff',
-        navigationBarTitleText: 'WeChat',
-        navigationBarTextStyle: 'black'
+        navigationBarBackgroundColor: '#f8f8f8',
+        navigationBarTitleText: 'Vant Weapp',
+        navigationBarTextStyle: 'black',
+        backgroundTextStyle: 'dark',
+        backgroundColor: '#f8f8f8'
       }
     };
     return _this;

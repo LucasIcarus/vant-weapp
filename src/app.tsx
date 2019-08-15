@@ -1,7 +1,8 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import Index from './pages/index'
+import Index from './pages/dashboard'
 
 import './app.less';
+import './common.css';
 
 class App extends Component {
 
@@ -14,14 +15,19 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/dashboard/index',
+      'pages/button/index',
+      'pages/loading/index',
+      'pages/transition/index',
+      'pages/toast/index',
     ],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
+      navigationBarBackgroundColor: '#f8f8f8',
+      navigationBarTitleText: 'Vant Weapp',
+      navigationBarTextStyle: 'black',
+      backgroundTextStyle: 'dark',
+      backgroundColor: '#f8f8f8',
+    },
   }
 
   componentDidMount () {}

@@ -88,4 +88,146 @@ VantComponent({
 </view>
 */
 
+import Taro, { FunctionComponent, Component } from '@tarojs/taro';
+import { View, Block } from '@tarojs/components';
+import { ITouchEvent } from '@tarojs/components/types/common';
+import { WeappLinkType } from '../../definitions';
+import { bem, noop } from '../common';
+import VanIcon from '../icon';
+import './index.less';
+
+export type CellArrowDirection = 'up' | 'down' | 'left';
+
+export interface ICellProps {
+  className?: string;
+  hoverClass?: string;
+  titleClass?: string;
+  valueClass?: string;
+  customStyle?: string;
+  titleWidth?: string;
+
+  url?: string;
+  linkType?: WeappLinkType;
+  arrowDirection?: CellArrowDirection;
+  icon?: string;
+  title?: string;
+  label?: string;
+  useLabelSlot?: boolean;
+  value?: string | number;
+
+  size?: string; // 唯一可选值 large
+  center?: boolean;
+  required?: boolean;
+  border?: boolean;
+  isLink?: boolean;
+  clickable?: boolean;
+
+  onClick?: (detail: any) => void;
+
+  children?: Component | string | JSX.Element;
+  renderIcon?: Component | string | JSX.Element;
+  renderTitle?: Component | string | JSX.Element;
+  renderLabel?: Component | string | JSX.Element;
+  renderRightIcon?: Component | string | JSX.Element;
+  renderExtra?: Component | string | JSX.Element;
+}
+
+
+const cx = bem({ prefix: 'van-', block: 'cell' });
+
+const Cell: FunctionComponent<ICellProps> = ({
+  className,
+  hoverClass,
+  titleClass,
+  valueClass,
+  size,
+  titleWidth,
+  customStyle = '',
+
+  url,
+  arrowDirection,
+  linkType = 'navigateTo',
+
+  icon,
+  title,
+  label,
+  value,
+  useLabelSlot = false,
+
+  border = true,
+  center = false,
+  isLink = false,
+  required = false,
+  clickable = false,
+
+  onClick = noop,
+
+  children = '',
+  renderIcon = '',
+  renderTitle = '',
+  renderLabel = '',
+  renderRightIcon = '',
+  renderExtra = '',
+}) => {
+  const clickHandler = (event: ITouchEvent) => {
+    onClick(event.detail);
+    if (url && wx) {
+      wx[linkType]({ url });
+    }
+  }
+
+  return (
+    <View
+      className={cx(null, [size, { center, required, borderless: !border, clickable: isLink || clickable }], className)}
+      hoverClass={cx(null, 'hover', hoverClass)}
+      hoverStayTime={70}
+      style={customStyle}
+      onClick={clickHandler}
+    >
+      {icon && <VanIcon name={icon} className={cx(['left-icon-wrap', 'left-icon"'])} />}
+      {renderIcon}
+      <View
+        style={`${titleWidth ? 'max-width:' + titleWidth + ';min-width:' + titleWidth : ''}`}
+        className={cx('title', null, titleClass)}
+      >
+        <Block>{title}</Block>
+        {renderTitle}
+        {renderLabel}
+        {(label && !useLabelSlot) && (
+          <Block>{label}</Block>
+        )}
+      </View>
+      <View className={cx('value', null, valueClass)}>
+        {(value || value === 0) && <Block>{value}</Block>}
+        {children}
+      </View>
+      {isLink && <VanIcon name={arrowDirection ? `arrow-${arrowDirection}` : 'arrow'} />}
+      {renderRightIcon}
+      {renderExtra}
+    </View>
+  );
+}
+
+Cell.defaultProps = {
+  customStyle: '',
+  linkType: 'navigateTo',
+  useLabelSlot: false,
+  border: true,
+  center: false,
+  isLink: false,
+  required: false,
+  clickable: false,
+  onClick: noop,
+  children: '',
+  renderIcon: '',
+  renderTitle: '',
+  renderLabel: '',
+  renderRightIcon: '',
+  renderExtra: '',
+};
+Cell.options = { addGlobalClass: true };
+
+export default Cell;
+
+
 

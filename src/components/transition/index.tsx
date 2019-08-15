@@ -31,7 +31,7 @@ import { useTransition } from './hooks';
 
 import './index.less';
 
-export type TransitionType = 'fade' | 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right';
+export type TransitionType = '' | 'fade' | 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right';
 
 export interface ITransitionDuration {
   enter: number;
@@ -48,6 +48,13 @@ interface ITransitionProps {
   onTransitionEnd?: () => void;
   onClick?: () => void;
   onTouchMove?: () => void;
+
+  enterClass?: string;
+  enterActiveClass?: string;
+  enterToClass?: string;
+  leaveClass?: string;
+  leaveActiveClass?: string;
+  leaveToClass?: string;
 }
 
 const cx = bem({ prefix: 'van-', block: 'transition' });
@@ -62,6 +69,13 @@ const Transition: FunctionComponent<ITransitionProps> = ({
   onTransitionEnd = noop,
   onClick = noop,
   onTouchMove = noop,
+
+  enterClass = '',
+  enterActiveClass = '',
+  enterToClass = '',
+  leaveClass = '',
+  leaveActiveClass = '',
+  leaveToClass = '',
 }) => {
   /**
    * type: '',
@@ -73,13 +87,20 @@ const Transition: FunctionComponent<ITransitionProps> = ({
     name,
     duration,
     transitionEndHandler: onTransitionEnd,
+    enterClass,
+    enterActiveClass,
+    enterToClass,
+    leaveClass,
+    leaveActiveClass,
+    leaveToClass,
   });
+
   return inited ? (
     <View
       onClick={onClick}
       onTouchMove={onTouchMove}
-      className={cx(null, { display }, [className, classes])}
-      style={`-webkit-transition-duration:${currentDuration}ms; transition-duration:${currentDuration}ms; ${customStyle}`}
+      className={cx(null, null, [className, classes])}
+      style={`-webkit-transition-duration:${currentDuration}ms; transition-duration:${currentDuration}ms; ${ display ? '' : 'display: none;' } ${customStyle}`}
     >{children}</View>
   ) : null;
 };
@@ -92,6 +113,13 @@ Transition.defaultProps = {
   onTransitionEnd: noop,
   onClick: noop,
   onTouchMove: noop,
+
+  enterClass: '',
+  enterActiveClass: '',
+  enterToClass: '',
+  leaveClass: '',
+  leaveActiveClass: '',
+  leaveToClass: '',
 };
 Transition.options = { addGlobalClass: true };
 

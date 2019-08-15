@@ -2,13 +2,6 @@ import { useState, useEffect } from '@tarojs/taro';
 import { ITransitionDuration, TransitionType } from '.';
 import { nextTick } from '../common';
 
-const getClassNames = (name: string) => ({
-  enter: `van-${name}-enter van-${name}-enter-active enter-class enter-active-class`,
-  'enter-to': `van-${name}-enter-to van-${name}-enter-active enter-to-class enter-active-class`,
-  leave: `van-${name}-leave van-${name}-leave-active leave-class leave-active-class`,
-  'leave-to': `van-${name}-leave-to van-${name}-leave-active leave-to-class leave-active-class`
-});
-
 type TransitionStatus = 'enter' | 'leave';
 
 interface ITransitionHookOptions {
@@ -16,12 +9,32 @@ interface ITransitionHookOptions {
   name: TransitionType;
   transitionEndHandler: () => void;
   duration: number | ITransitionDuration;
-}
 
+  enterClass: string;
+  enterActiveClass: string;
+  enterToClass: string;
+  leaveClass: string;
+  leaveActiveClass: string;
+  leaveToClass: string;
+}
 
 export function useTransition(options: ITransitionHookOptions) {
   // 简单状态锁, 不能使用 statehook
   let status: TransitionStatus = 'enter';
+  const {
+    enterClass,
+    enterActiveClass,
+    enterToClass,
+    leaveClass,
+    leaveActiveClass,
+    leaveToClass,
+  } = options;
+  const getClassNames = (name: string) => ({
+    enter: `van-${name}-enter van-${name}-enter-active ${enterClass} ${enterActiveClass}`,
+    'enter-to': `van-${name}-enter-to van-${name}-enter-active ${enterToClass} ${enterActiveClass}`,
+    leave: `van-${name}-leave van-${name}-leave-active ${leaveClass} ${leaveActiveClass}`,
+    'leave-to': `van-${name}-leave-to van-${name}-leave-active ${leaveToClass} ${leaveActiveClass}`
+  });
 
   const [inited, changeInited] = useState(false);
   const [display, toggleDisplay] = useState(false);
@@ -82,7 +95,7 @@ export function useTransition(options: ITransitionHookOptions) {
         checkStatus('leave');
         changeClasses(classNames['leave-to']);
       })
-      .catch(() => {});
+      .catch((e) => { console.warn(e) });
   }
 
   useEffect(() => {

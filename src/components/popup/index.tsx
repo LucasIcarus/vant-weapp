@@ -162,7 +162,7 @@ const Popup: FunctionComponent<IPopupProps> = ({
       }
       {inited &&
         <View
-          className={cx(null, position, [...classes, className])}
+          className={cx(null, position, [classes, className])}
           style={`z-index:${zIndex};-webkit-transition-duration:${currentDuration}ms;transition-duration:${currentDuration}ms;${display ? '' : 'display: none;'}${customStyle}`}
         >
           <View />

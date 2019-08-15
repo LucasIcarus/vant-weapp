@@ -123,7 +123,7 @@ interface IButtonProps {
   hairline?: boolean,
   disabled?: boolean,
 
-  onClick?: () => void;
+  onClick?: (...args: any[]) => void;
   onGetUserInfo?: WeappEventFunction<{
     /** 用户信息 */
     userInfo: {

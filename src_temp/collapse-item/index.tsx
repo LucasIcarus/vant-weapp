@@ -158,3 +158,31 @@ VantComponent({
 </view>
 
 */
+import Taro, { FunctionComponent } from '@tarojs/taro';
+import { View } from '@tarojs/components';
+import { bem, noop } from '../common';
+import './index.less';
+
+interface ICollapseItemProps {
+
+}
+
+const CollapseItem: FunctionComponent<ICollapseItemProps> = ({
+
+}) => {
+  const cx = bem({ prefix, block: 'icon' });
+  return (
+    <View
+    >
+
+    </View>
+  );
+}
+
+CollapseItem.defaultProps = {
+
+};
+CollapseItem.options = { addGlobalClass: true };
+
+export default CollapseItem;
+
