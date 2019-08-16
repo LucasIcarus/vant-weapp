@@ -98,6 +98,7 @@ import { bem, noop } from '../common';
 import './index.less';
 import Overlay from '../overlay';
 import { useTransition } from '../transition/hooks';
+import { ReactNode } from 'react';
 
 type PopupPosition = 'top' | 'bottom' | 'right' | 'left' | 'center';
 
@@ -111,7 +112,7 @@ interface IPopupProps {
   overlayStyle?: string;
   className?: string;
   customStyle?: string;
-  children?: Component | string | JSX.Element;
+  children?: ReactNode;
   onTransitionEnd?: () => void;
   onClickOverlay?: () => void;
   onClose?: () => void;

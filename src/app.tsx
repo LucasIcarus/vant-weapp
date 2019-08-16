@@ -20,6 +20,7 @@ class App extends Component {
       'pages/loading/index',
       'pages/transition/index',
       'pages/toast/index',
+      'pages/popup/index',
     ],
     window: {
       navigationBarBackgroundColor: '#f8f8f8',

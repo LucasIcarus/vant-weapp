@@ -34,7 +34,7 @@ var _App = function (_BaseComponent) {
     var _this = _possibleConstructorReturn(this, (_App.__proto__ || Object.getPrototypeOf(_App)).apply(this, arguments));
 
     _this.config = {
-      pages: ['pages/dashboard/index', 'pages/button/index', 'pages/loading/index', 'pages/transition/index', 'pages/toast/index'],
+      pages: ['pages/dashboard/index', 'pages/button/index', 'pages/loading/index', 'pages/transition/index', 'pages/toast/index', 'pages/popup/index'],
       window: {
         navigationBarBackgroundColor: '#f8f8f8',
         navigationBarTitleText: 'Vant Weapp',
